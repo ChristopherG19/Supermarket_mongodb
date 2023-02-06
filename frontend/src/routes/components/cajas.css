@@ -1,0 +1,12 @@
+.caja-details {
+    height: 20px;
+    width: 350px;
+    background-color: white;
+}
+
+.cajas {
+    height: 350px;
+    width: 350px;
+    background-color: white;
+    color: blueviolet;
+}
