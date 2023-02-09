@@ -19,6 +19,7 @@ const Header_sales = ({ cajero }) => {
       <div>
         <h2>{cajero}</h2>
         <h2>{getCurrentDate()}</h2>
+        {/* Aquí sería bueno poner el logo o algo*/}
       </div>
     </div>
   )

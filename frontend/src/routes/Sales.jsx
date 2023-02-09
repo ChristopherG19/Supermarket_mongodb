@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Header from './components/header'
 import Header_sales from './components/Header_ventas'
-import Sells_table from './components/Sells_table'
+import Sales_table from './components/Sales_table'
 
 const Sales = ({}) => {
 
@@ -10,7 +10,7 @@ const Sales = ({}) => {
         <div>
             <Header title="Ventas"></Header>
             <Header_sales cajero="prueba"></Header_sales>
-            <Sells_table></Sells_table>
+            <Sales_table></Sales_table>
         </div>
     )
 }
