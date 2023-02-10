@@ -1,31 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sales_table_item from './Sales_table_item'
 
 
 const Sales_table = ({}) => {
 
-  // const[items, setitems] = useEffect(null)
-
-  
+  const[items, setitems] = useState(null)
 
   return (
-    <body class="flex items-center justify-center">
+    <body>
         <div class="container">
-            <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
-                <thead class="text-white">
-
-                    <tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                      <th class="p-3 text-left">Name</th>
-                      <th class="p-3 text-left">Email</th>
-                      <th class="p-3 text-left" width="110px">Actions</th>
-                  </tr>
-                </thead>
-                <tbody class="flex-1 sm:flex-none">
-                    <Sales_table_item Name = "Name" Email = "Email@gmail.com" Actions="Delete"/>
-                    <Sales_table_item Name = "Name" Email = "Email@gmail.com" Actions="Delete"/>
-                </tbody>
-            </table>
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Producto</th>
+                <th>Precio</th>
+            </tr>
+            </thead>
+            <tbody>
+                <Sales_table_item Name = "19" Email = "Jábon" Actions="10"/>
+                <Sales_table_item Name = "20" Email = "esponja" Actions="10"/>
+            </tbody>
+          </table>
         </div>
     </body>
   )
