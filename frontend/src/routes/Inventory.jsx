@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Header from './components/header'
-import Inventory_table from './components/Inventory_table'
+import Header from '../components/header'
+import Inventory_table from '../components/Inventory_table'
 
 const Inventory = ({}) => {
 
