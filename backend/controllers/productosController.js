@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // get all Producto
 const getProductos = async (req, res) => {
-    const productos = await Productos.find({}).sort({id: 1})
+    const productos = await Productos.find({}).sort({id: 1}).limit(10)
 
     res.status(200).json(productos)
 }

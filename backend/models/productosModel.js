@@ -2,21 +2,21 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const Productos = new Schema({
+const ProductosSchema = new Schema({
     id: {
         type: Number,
         required: true
     },
     nombre: {
-        type: Text,
+        type: String,
         required: true
     },
     categoria: {
-        type: Text,
+        type: String,
         required: true
     },
     proveedor: {
-        type: Text,
+        type: String,
         required: true
     },
     cantidadDisponible: {
@@ -28,9 +28,9 @@ const Productos = new Schema({
         required: true
     },
     description: {
-        type: Text,
+        type: String,
         required: true
     }
 }, {versionKey: false})
 
-module.exports = mongoose.model('Productos', Productos)
+module.exports = mongoose.model('Productos', ProductosSchema)

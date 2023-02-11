@@ -4,30 +4,8 @@ import { useEffect, useState } from 'react'
 import Header from './components/header'
 import Header_sales from './components/Header_ventas'
 import Sales_table_item from './components/Sales_table_item'
+import SalesForm from './components/SalesForm'
 // import { getOneProducto } from '../../../backend/controllers/productosController'
-
-/**
-const addToSale = ({}) => {
-
-  const[producto, setProducto] = useState(null)
-
-  useEffect(() => {
-    const fetchProducto = async () => {
-      const respone = await fetch('http://localhost:4000/supermarket')
-      const json = await respone.json()
-
-      if (respone.ok){
-        setProducto(json)
-      }
-    }
-
-  }, [])
-
-  return (producto)
-}
-
-*/
-
 
 const Sales = ({}) => {
 
@@ -43,6 +21,21 @@ const Sales = ({}) => {
   }
 
   const fecha = getCurrentDate()
+
+  const[productos, setProductos] = useState(null)
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      const response = await fetch('http://localhost:4000/productos')
+      const json = await response.json()
+
+      if (response.ok){
+        setProductos(json)
+      }
+    }
+
+    fetchProductos()
+  }, [])
 
   const[total, setTotal] = useState(0) // total de la compra
   const[newProduct, setNewProduct] = useState(null) // producto a agregar (json)
@@ -72,12 +65,12 @@ const Sales = ({}) => {
         title="Ventas"
       />
       <Header_sales 
-        cajero="prueba" 
+        cajero={id_cajero}
         date = {fecha}
       />
       {/** Tabla */}
       <body>
-        <div class="container">
+        <div className="container">
           <table>
             <thead>
               <tr>
@@ -88,11 +81,9 @@ const Sales = ({}) => {
             </thead>
             <tbody>
               {/** Elementos de la tabla */}
-              <Sales_table_item id = "19" producto = "Jábon" precio ="10"/>
-              <Sales_table_item id = "20" producto = "esponja" precio ="10"/>
-              {productosCompra && productosCompra.map((productoC) => (
+              {productos && productos.map((productoC) => (
                 <Sales_table_item 
-                  id = {productoC._id}
+                  id = {productoC.id}
                   producto = {productoC.nombre}
                   precio = {productoC.precio}
                 />
@@ -101,34 +92,7 @@ const Sales = ({}) => {
           </table>
         </div>
       </body>
-      {/** Footer */}
-      <footer>
-        <input 
-          placeholder='Codigo Producto'
-          type='number'
-          onChange={event => handleChange(event)}
-        >
-        </input>
-        <button 
-          type='submit'
-          onClick={handleClickAdd()}
-        >
-          Añadir a la compra
-        </button>
-        <h3> Total : {total}</h3>
-        <label>
-          <input 
-              type='checkbox'
-              onClick={() => setMetodoPago(!metodopago)}
-            ></input>
-            <p>{metodopago === true ? "Efectivo": "Tarjeta"}</p>
-        </label>
-        <button 
-          type='submit'
-        >
-          Finalizar la compra
-        </button>
-      </footer>
+      <SalesForm/>
     </div>
   )
 }

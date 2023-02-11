@@ -8,7 +8,7 @@ const CompraSchema = new Schema({
         required: true
     },
     metodo_pago : {
-        type: Text,
+        type: String,
         required: true
     },
     cambio : {
