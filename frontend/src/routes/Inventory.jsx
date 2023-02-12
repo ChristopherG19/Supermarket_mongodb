@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../components/header'
+import Header from '../components/Header'
 import Inventory_table_item from '../components/Inventory_table_item'
-import './components/css/Inventory.css'
+import '../components/css/Inventory.css'
 
 const Inventory = ({}) => {
 
