@@ -1,0 +1,119 @@
+/* #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+} */
+
+.all {
+    height: inherit;
+    width: 100%;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    justify-content: space-around;
+    display: flex;
+}
+
+.secondary-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    padding: 1em 0;
+    margin: 1em 0;
+
+}
+
+select {
+    padding: 1em;
+    border-radius: 1em;
+    border-color: white;
+    background-color: green;
+}
+
+
+table {
+    /* class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5" */
+    display: table;
+    height: 20%;
+    width: 100%;
+    padding: 0em 1em;
+    overflow-y: auto;
+}
+
+thead {
+    background-color: #000000;
+}
+
+tbody {
+    height: 10px;
+}
+
+tr {
+    /** class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0"*/
+    flex-wrap: nowrap;
+    table-layout: auto;
+}
+
+tr:nth-child(even) {
+    background-color: #363636;
+}
+
+
+footer {
+    bottom: 0;
+    height: 15%;
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    flex-direction: column;
+    
+}
+
+footer > div {
+    display: flex;
+
+}
+
+footer > div > button {
+    margin: 1em;
+}
+
+footer > div > div > input {
+    margin: 1em;
+    padding: 0.5em;
+}
+
+footer > button {
+    padding: 1em;
+}
+
+hr {
+    border: none;
+    border-top: 3px double #919191;
+    color: #919191;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+
+hr:after {
+    background: #000000;
+    content: '---';
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
+}
