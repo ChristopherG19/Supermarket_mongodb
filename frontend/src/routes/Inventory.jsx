@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from './components/header'
 import Inventory_table_item from './components/Inventory_table_item'
+import './components/css/Header.css'
+import './components/css/Inventory.css'
 
 const Inventory = ({}) => {
 
   const[productos, setProductos] = useState([])
   const[categoria, setCategoria] = useState('Beauty & Hygiene')
+  const[skip, setSkip] = useState(0)
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -80,10 +83,10 @@ const Inventory = ({}) => {
   ]
 
   return (
-    <div>
+    <div className='all'>
       {/** Headers */}
       <Header title="Inventory"></Header>
-      <header>
+      <header className='secondary-header'>
         <form>
           <select>
             {options.map((o) => (
@@ -101,31 +104,46 @@ const Inventory = ({}) => {
         </form>
       </header>
       {/** Table */}
-      <body class="flex items-center justify-center">
-        <div class="container">
-          <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
-            <thead class="text-white">
-              <tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                {/** Titles */}
-                <th>id</th>
-                <th>Producto</th>
-                <th>Proveedor</th>
-                <th>Precio</th>
-                <th>Existencias</th>
-                <th width="110px">Borrar</th>
-              </tr>
-            </thead>
-            <tbody class="flex-1 sm:flex-none">
-              {/** Elementos de la tabla */}
-              {productos && productos.map((productoC) => (
-                <Inventory_table_item 
-                  item={productoC}
-                />
-              ))}
-            </tbody>
-          </table>
+      <div className='container'>
+        <table>
+          <thead>
+            <tr>
+              {/** Titles */}
+              <th>id</th>
+              <th>Producto</th>
+              <th>Proveedor</th>
+              <th>Precio</th>
+              <th>Existencias</th>
+              <th width="110px">Borrar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/** Elementos de la tabla */}
+            {productos && productos.map((productoC) => (
+              <Inventory_table_item 
+                item={productoC}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <footer>
+        <div>
+          <button>retroceder</button>
+          <button>avanzar</button>
         </div>
-      </body>
+        <div>
+          <div>
+            <input type="number" placeholder='codigo'/>
+            <input type="text" placeholder='nombre producto'/>
+            <input type="text" placeholder='proveedor'/>
+            <input type="number" placeholder='cant. Disponible'/>
+            <input type="number" placeholder='precio'/>
+            <input type="text" placeholder='descripción'/>
+          </div>
+          <button type = "submit">Añadir Producto</button>
+        </div>
+      </footer>
     </div>
   )
 }

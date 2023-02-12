@@ -1,0 +1,98 @@
+/* #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+} */
+
+
+
+.all {
+    height: inherit;
+    width: inherit;
+}
+
+h1 {
+    font-size: 2.2em;
+    line-height: 1.1;
+}
+
+.container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+    display: flex;
+}
+
+.secondary-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    padding: 1em 0;
+    margin: 1em 0;
+
+}
+
+select {
+    padding: 1em;
+    border-radius: 2em;
+    border-color: white;
+    background-color: green;
+}
+
+
+table {
+    /* class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5" */
+    display: table;
+    height: 50em;
+    overflow-y: auto;
+}
+
+tbody {
+    height: 10px;
+}
+
+tr {
+    /** class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0"*/
+    flex-wrap: nowrap;
+    table-layout: auto;
+}
+
+footer {
+    bottom: 0;
+    height: 15%;
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    flex-direction: column;
+    
+}
+
+footer > div {
+    display: flex;
+
+}
+
+footer > div > button {
+    margin: 1em;
+}
+
+footer > div > div > input {
+    margin: 1em;
+    padding: 0.5em;
+}
+
+footer > button {
+    padding: 1em;
+}

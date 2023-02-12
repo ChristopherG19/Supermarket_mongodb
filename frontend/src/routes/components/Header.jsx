@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import './components/css/Header.css'
 
 const Header = ({ title }) => {
 
   return (
-    <div>
+    <header className = 'cabezera'>
       <h1>{title}</h1>
-    </div>
+    </header>
   )
 }
 
