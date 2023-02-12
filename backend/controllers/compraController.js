@@ -1,11 +1,11 @@
-const Compra = require('../models/compraModel')
+const Compra = require('../models/comprasModel')
 const mongoose = require('mongoose')
 
 // get all Compras
 const getCompra = async (req, res) => {
     const compras = await Compra.find({}).sort({id: 1}) 
 
-    res.status(200).jscon(compras)
+    res.status(200).json(compras)
 }
 
 // get una sola compra
@@ -22,7 +22,7 @@ const getOneCompra = async (req, res) => {
 }
 
 // crear nueva Compra
-const createCompra = async (rqu, res) => {
+const createCompra = async (req, res) => {
     const {id, metodo_pago, cambio, fecha, hora, num_caja, productos_comprados, cajero_id} = req.params
 
     try {
@@ -33,8 +33,18 @@ const createCompra = async (rqu, res) => {
     }
 }
 
+const sizeCollection = async (req, res) => {
+    try {
+        const countC = await Compra.countDocuments()
+        res.status(200).json({ count: countC })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
     createCompra,
     getCompra,
     getOneCompra,
+    sizeCollection
 }

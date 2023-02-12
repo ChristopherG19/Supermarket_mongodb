@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const CajaRoutes = require('./routes/CajasRoute')
-const CompraRoutes = require('./routes/compraRoute')
+const ComprasRoutes = require('./routes/comprasRoute')
 const ProductoRoutes = require('./routes/productosRoute')
 const cors = require('cors')
 
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 
 // Rutas
 app.use('/cajas', CajaRoutes)
-app.use('/compras', CompraRoutes)
+app.use('/compras', ComprasRoutes)
 app.use('/productos', ProductoRoutes)
 
 //connect to database

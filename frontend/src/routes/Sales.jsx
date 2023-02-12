@@ -14,13 +14,20 @@ const Sales = ({}) => {
     let date = newDate.getDate()
     let month = newDate.getMonth() + 1
     let year = newDate.getFullYear()
+
+    return `${date}/${month<10?`0${month}`:`${month}`}/${year}`
+  }
+
+  function getCurrentHour() {
+    let newDate = new Date()
     let hour = newDate.getHours()
     let minutes = newDate.getMinutes()
 
-    return `${date} / ${month<10?`0${month}`:`${month}`} / ${year} , ${hour}:${minutes}`
+    return `${hour}:${minutes}`
   }
 
   const fecha = getCurrentDate()
+  const hora = getCurrentHour()
 
   const[productos, setProductos] = useState(null)
 
@@ -66,7 +73,9 @@ const Sales = ({}) => {
       />
       <Header_sales 
         cajero={id_cajero}
+        caja={id_caja}
         date = {fecha}
+        hora = {hora}
       />
       {/** Tabla */}
       <body>
@@ -76,6 +85,7 @@ const Sales = ({}) => {
               <tr>
                 <th>Id</th>
                 <th>Producto</th>
+                <th>Disponibles</th>
                 <th>Precio</th>
             </tr>
             </thead>
@@ -86,13 +96,19 @@ const Sales = ({}) => {
                   id = {productoC.id}
                   producto = {productoC.nombre}
                   precio = {productoC.precio}
+                  disponibilidad = {productoC.cantidadDisponible}
                 />
               ))}
             </tbody>
           </table>
         </div>
       </body>
-      <SalesForm/>
+      <SalesForm 
+        fecha={fecha}
+        hora={hora}
+        cajeroId={id_cajero}
+        cajaId={id_caja}
+      />
     </div>
   )
 }
