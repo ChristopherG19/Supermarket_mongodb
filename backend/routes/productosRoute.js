@@ -14,11 +14,13 @@ const router = express.Router()
 // Obtener todas las productos
 router.get('/', getProductos)
 
-// Get producto by category
-router.get('/:categoria/:skip', findByCategory)
-
 // Obtener una producto
 router.get('/:id', getOneProducto)
+
+// Get producto by category
+router.get('/categoria/:categoria/:skip', findByCategory)
+
+// Get producto by nombre
 router.get('/nombre/:nombre', getOneProductoByNombre)
 
 // Post a new producto
