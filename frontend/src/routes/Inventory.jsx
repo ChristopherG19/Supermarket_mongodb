@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import Inventory_table_item from '../components/Inventory_table_item'
 import '../components/css/Inventory.css'
+import AddProduct from '../components/AddProduct'
 
 const Inventory = ({}) => {
 
@@ -155,17 +156,7 @@ const Inventory = ({}) => {
           </button>
         </div>
         <hr></hr>
-        <div>
-          <div>
-            <input type="number" placeholder='codigo'/>
-            <input type="text" placeholder='nombre producto'/>
-            <input type="text" placeholder='proveedor'/>
-            <input type="number" placeholder='cant. Disponible'/>
-            <input type="number" placeholder='precio'/>
-            <input type="text" placeholder='descripción'/>
-          </div>
-          <button type = "submit">Añadir Producto</button>
-        </div>
+        <AddProduct></AddProduct>
       </footer>
     </div>
   )
