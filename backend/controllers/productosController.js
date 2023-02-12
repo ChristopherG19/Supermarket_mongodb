@@ -1,9 +1,12 @@
 const Productos = require('../models/productosModel')
 const mongoose = require('mongoose')
+const productosModel = require('../models/productosModel')
 
 // get all Producto
 const getProductos = async (req, res) => {
-    const productos = await Productos.find({}).sort({id: 1}).limit(10)
+
+
+    const productos = await Productos.find({}).sort({id: 1}).skip(0).limit(20)
 
     res.status(200).json(productos)
 }
@@ -51,13 +54,33 @@ const createProducto = async (req, res) => {
 const deleteProducto = async (req, res) => {
     const { id } = req.params
 
-    const producto = await productosModel.findOneAndDelete({id: id})
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({error: "No existe el producto que desea eliminar"})
+    }
 
-    if(producto == null){
+    const producto = await productosModel.findOneAndDelete({_id: id})
+
+    if (!producto) {
+        return res.status(400).json({error: "No existe el producto que desea eliminar"})
+    }
+
+    res.status(200).json(producto)
+}
+
+const findByCategory = async (req, res) => {
+
+    const { categoria, skip } = req.params
+
+    let limit = 20
+    let s = limit * skip
+
+    const productos = await Productos.find({categoria: categoria}).sort({id: 1}).skip(s).limit(limit)
+
+    if (productos.length == 0){
         res.status(400).json({error: 'No se ha encontrado el producto especificado'})
     }
 
-    res.status(200).json()
+    res.status(200).json(productos)
 }
 
 const updateProducto = async (req, res) => {
@@ -71,7 +94,7 @@ const updateProducto = async (req, res) => {
         res.status(400).json({error: 'No se ha encontrado el producto espeficado'})
     }
 
-    res.status(200).json(producto[0])
+    res.status(200).json(producto)
 }
 
 module.exports = {
@@ -80,5 +103,6 @@ module.exports = {
     getOneProducto,
     deleteProducto, 
     updateProducto,
-    getOneProductoByNombre
+    getOneProductoByNombre,
+    findByCategory
 }

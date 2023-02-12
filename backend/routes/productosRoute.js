@@ -5,22 +5,26 @@ const {
     getOneProducto,
     deleteProducto, 
     updateProducto,
-    getOneProductoByNombre
+    getOneProductoByNombre,
+    findByCategory
 } = require('../controllers/productosController')
 
 const router = express.Router()
 
-// Obtener todas las cajas
+// Obtener todas las productos
 router.get('/', getProductos)
 
-// Obtener una caja
+// Get producto by category
+router.get('/:categoria/:skip', findByCategory)
+
+// Obtener una producto
 router.get('/:id', getOneProducto)
 router.get('/nombre/:nombre', getOneProductoByNombre)
 
-// Post a new caja
+// Post a new producto
 router.post('/', createProducto)
 
-// Delete a caja
+// Delete a producto
 router.delete('/:id', deleteProducto)
 
 // Update a caja
