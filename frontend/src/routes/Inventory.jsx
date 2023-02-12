@@ -11,6 +11,16 @@ const Inventory = ({}) => {
   const[categoria, setCategoria] = useState('Beauty & Hygiene')
   const[skip, setSkip] = useState(0)
 
+  const handleClickAddSkip = () => {
+    let newValue = skip + 1
+    setSkip(newValue)
+  }
+
+  const handleClickReduceSkip = () => {
+    let newValue = skip - 1
+    setSkip(newValue)
+  }
+
   useEffect(() => {
     const fetchProductos = async () => {
       const response = await fetch('http://localhost:4000/productos')
@@ -129,9 +139,14 @@ const Inventory = ({}) => {
       </div>
       <footer>
         <div>
-          <button>retroceder</button>
-          <button>avanzar</button>
+          <button type='submit' onClick={handleClickReduceSkip}>
+            retroceder
+          </button>
+          <button type='submit' onClick={handleClickAddSkip}>
+            avanzar
+          </button>
         </div>
+        <hr></hr>
         <div>
           <div>
             <input type="number" placeholder='codigo'/>

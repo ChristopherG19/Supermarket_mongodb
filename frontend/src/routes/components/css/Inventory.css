@@ -96,3 +96,20 @@ footer > div > div > input {
 footer > button {
     padding: 1em;
 }
+
+hr {
+    border: none;
+    border-top: 3px double #919191;
+    color: #919191;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+
+hr:after {
+    background: #000000;
+    content: '---';
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
+}
