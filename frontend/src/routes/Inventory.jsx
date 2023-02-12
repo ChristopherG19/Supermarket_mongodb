@@ -12,7 +12,7 @@ const Inventory = ({}) => {
 
   useEffect(() => {
     const fetchProductos = async () => {
-      const response = await fetch(`http://localhost:4000/productos/${categoria}/${skip}`)
+      const response = await fetch(`http://localhost:4000/productos/categoria/${categoria}/${skip}`)
       const json = await response.json()
 
       if (response.ok){
@@ -24,7 +24,7 @@ const Inventory = ({}) => {
   }, [])
 
   const fetchProductos = async () => {
-    const response = await fetch(`http://localhost:4000/productos/${categoria}/${skip}`)
+    const response = await fetch(`http://localhost:4000/productos/categoria/${categoria}/${skip}`)
     const json = await response.json()
 
     if (response.ok){

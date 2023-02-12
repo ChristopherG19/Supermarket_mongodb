@@ -113,7 +113,8 @@ const SalesForm = (props) => {
                 setIdCompra(0)
                 setCambioC(0)
                 setCantProd(0)
-                setMetodoPago('Efectivo')
+                setMetodoPago(true)
+                setMetodoPagoC('Efectivo')
                 setProductosC({})
                 setTotal(0)
                 setTotalRecibido(0)
@@ -166,7 +167,7 @@ const SalesForm = (props) => {
                         const { id, precioIn, cantidad } = productosC[key]
                         return (
                         <Sales_table_item 
-                            key={id}
+                            keyT={id}
                             id = {id}
                             producto = {key}
                             precio = {precioIn}
