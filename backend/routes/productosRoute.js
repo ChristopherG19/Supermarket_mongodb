@@ -13,6 +13,9 @@ const router = express.Router()
 // Obtener todas las productos
 router.get('/', getProductos)
 
+// Get producto by category
+router.get('/:categoria/:skip', findByCategory)
+
 // Obtener una producto
 router.get('/:id', getOneProducto)
 
@@ -24,8 +27,5 @@ router.delete('/:id', deleteProducto)
 
 // Update a producto
 router.patch('/:id', updateProducto)
-
-// Get producto by category
-router.get('/:categoria', findByCategory)
 
 module.exports = router

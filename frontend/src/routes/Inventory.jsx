@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from './components/header'
 import Inventory_table_item from './components/Inventory_table_item'
-import './components/css/Header.css'
 import './components/css/Inventory.css'
 
 const Inventory = ({}) => {
@@ -11,19 +10,9 @@ const Inventory = ({}) => {
   const[categoria, setCategoria] = useState('Beauty & Hygiene')
   const[skip, setSkip] = useState(0)
 
-  const handleClickAddSkip = () => {
-    let newValue = skip + 1
-    setSkip(newValue)
-  }
-
-  const handleClickReduceSkip = () => {
-    let newValue = skip - 1
-    setSkip(newValue)
-  }
-
   useEffect(() => {
     const fetchProductos = async () => {
-      const response = await fetch('http://localhost:4000/productos')
+      const response = await fetch(`http://localhost:4000/productos/${categoria}/${skip}`)
       const json = await response.json()
 
       if (response.ok){
@@ -33,6 +22,33 @@ const Inventory = ({}) => {
 
     fetchProductos()
   }, [])
+
+  const fetchProductos = async () => {
+    const response = await fetch(`http://localhost:4000/productos/${categoria}/${skip}`)
+    const json = await response.json()
+
+    if (response.ok){
+      setProductos(json)
+    }
+  }
+
+  const handleSelect = (cat) => {
+    setCategoria(cat)
+  }
+
+  const handleClickAddSkip = () => {
+    let newValue = skip + 1
+    setSkip(newValue)
+    console.log(skip)
+    fetchProductos()
+  }
+
+  const handleClickReduceSkip = () => {
+    let newValue = skip - 1
+    setSkip(newValue)
+    console.log(skip)
+    fetchProductos()
+  }
 
   const options = [
     {
@@ -103,14 +119,16 @@ const Inventory = ({}) => {
               <option 
                 key={o.key} 
                 value={o.value}
+
+                // onClick = {handleSelect}
                 >
                   {o.label}
                 </option>
             ))}
           </select>
-          {/* <button type='submit' value='submit' onClick={setCategoria(select.value)}>
+          <button type='submit' value='submit'>
             Aplicar categoría
-          </button> */}
+          </button>
         </form>
       </header>
       {/** Table */}

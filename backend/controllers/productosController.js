@@ -5,7 +5,6 @@ const productosModel = require('../models/productosModel')
 // get all Producto
 const getProductos = async (req, res) => {
 
-    const { categoria, skip, orden } = req.params
 
     const productos = await Productos.find({}).sort({id: 1}).skip(0).limit(20)
     //const productos = await Productos.find({categoria: cat}).sort({id: 1}).skip(page).limit(20)
@@ -58,15 +57,18 @@ const deleteProducto = async (req, res) => {
 
 const findByCategory = async (req, res) => {
 
-    const { categoria } = req.categoria
+    const { categoria, skip } = req.params
 
-    const productos = await Productos.find({categoria: categoria}).sort({id: 1}).skip(0).limit(20)
+    let limit = 20
+    let s = limit * skip
 
-    if (producto.length == 0){
+    const productos = await Productos.find({categoria: categoria}).sort({id: 1}).skip(s).limit(limit)
+
+    if (productos.length == 0){
         res.status(400).json({error: 'No se ha encontrado el producto especificado'})
     }
 
-    res.status(200).json(producto[0])
+    res.status(200).json(productos)
 }
 
 const updateProducto = async (req, res) => {
@@ -80,7 +82,7 @@ const updateProducto = async (req, res) => {
         res.status(400).json({error: 'No se ha encontrado el producto espeficado'})
     }
 
-    res.status(200).json(producto[0])
+    res.status(200).json(producto)
 }
 
 module.exports = {
