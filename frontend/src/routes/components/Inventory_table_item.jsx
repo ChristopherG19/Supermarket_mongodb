@@ -5,14 +5,13 @@ import { Link } from 'react-router-dom'
 const Inventory_table_item = ({ item }) => {
 
   const handleClick = async () => {
-    const response = await fetch('http://localhost:4000/productos' + item._id, {
+    const response = await fetch('http://localhost:4000/productos/' + item._id, {
       method: 'DELETE'
     })
     const json = await response.json()
 
     if (response.ok) {
-      
-
+      dispach({type: 'Delete_Product', payload: json})
     }
 
   }

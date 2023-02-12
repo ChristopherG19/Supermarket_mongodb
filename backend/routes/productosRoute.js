@@ -26,6 +26,6 @@ router.delete('/:id', deleteProducto)
 router.patch('/:id', updateProducto)
 
 // Get producto by category
-router.patch('/:categoria', findByCategory)
+router.get('/:categoria', findByCategory)
 
 module.exports = router
