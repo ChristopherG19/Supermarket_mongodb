@@ -23,10 +23,10 @@ const getOneCompra = async (req, res) => {
 
 // crear nueva Compra
 const createCompra = async (req, res) => {
-    const {id, metodo_pago, cambio, fecha, hora, num_caja, productos_comprados, cajero_id} = req.params
+    const {id, metodo_pago, cambio, fecha, hora, num_caja, productos_caja, cajero_id} = req.body
 
     try {
-        const compra = await Compra.create({id, metodo_pago, cambio, fecha, hora, num_caja, productos_comprados, cajero_id})
+        const compra = await Compra.create({id, metodo_pago, cambio, fecha, hora, num_caja, productos_caja, cajero_id})
         res.status(200).json(compra)
     } catch (error){
         res.status(400).json({error: error.message})

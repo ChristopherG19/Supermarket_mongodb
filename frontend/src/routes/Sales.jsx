@@ -25,7 +25,7 @@ const Sales = ({}) => {
 
     return `${hour}:${minutes}`
   }
-
+  
   const fecha = getCurrentDate()
   const hora = getCurrentHour()
 
@@ -44,26 +44,8 @@ const Sales = ({}) => {
     fetchProductos()
   }, [])
 
-  const[total, setTotal] = useState(0) // total de la compra
-  const[newProduct, setNewProduct] = useState(null) // producto a agregar (json)
-  const[newProductC, setNewProductC] = useState(null) // producto a agregar (código)
-  const[metodopago, setMetodoPago] = useState(false) // false: efectivo, true: tarjeta
   const id_cajero = 1
   const id_caja = 1
-
-  const[compra, setCompra] = useState([]) // Infomración de la venta
-  const[productosCompra, setProductoCompra] = useState([]) // Listado de productos
-
-
-  const handleChange = (codigo) => {
-    setNewProductC(codigo)
-  }
-
-  const handleClickAdd = () => {
-    // getOneProducto(newProductC)
-    // setProductoCompra(productosCompra.push(getOneProducto(newProduct)))
-    
-  }
 
   return (
     <div>

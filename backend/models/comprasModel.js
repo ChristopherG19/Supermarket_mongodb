@@ -20,7 +20,7 @@ const CompraSchema = new Schema({
         required : true
     }, 
     hora: {
-        type: Date,
+        type: String,
         required : true
     },
     num_caja : {
@@ -28,7 +28,7 @@ const CompraSchema = new Schema({
         required: true
     }, 
     productos_caja : {
-        type: Array,
+        type: Object,
         required: true
     },
     cajero_id: {

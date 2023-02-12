@@ -22,60 +22,78 @@ const SalesForm = (props) => {
 
     const agregarProducto = (props) => {
         if(props != null){
-            const ingreso = {
-                id: parseInt(id),
-                precioIn: props.precio,
-                cantidad: parseInt(cantProd)
+            if(parseInt(cantProd) != 0){
+                let ingreso = {}
+
+                if(productosC.hasOwnProperty([props.nombre])){
+                    ingreso = {
+                        id: parseInt(id),
+                        precioIn: props.precio,
+                        cantidad: productosC[props.nombre].cantidad + parseInt(cantProd)
+                    }
+                } else {
+                    ingreso = {
+                        id: parseInt(id),
+                        precioIn: props.precio,
+                        cantidad: parseInt(cantProd)
+                    }
+                }
+
+                setProductosC({...productosC, [props.nombre]:ingreso})
+
+                const totalTemp = total + (ingreso.precioIn*ingreso.cantidad)
+
+                setTotal(totalTemp)
             }
-
-            setProductosC({...productosC, [props.nombre]:ingreso})
-
-            const totalTemp = total + (ingreso.precioIn*ingreso.cantidad)
-
-            setTotal(totalTemp)
         }
     }
 
-    const evalTotal = async () => {
+    const evalTotal = async (e) => {
+        e.preventDefault()
         if(totalRecibido < total){
             setError("Lo sentimos, debes pagar la totalidad de la factura")
             setTotalRecibido(0)
         } else {
             setError(null)
+            const id = idCompra
+            const metodo_pago = metodoPagoC
             const fecha = props.fecha
             const hora = props.hora
-            const cajeroId = props.cajeroId
-            const cajaId = props.cajaId
+            const num_caja = props.cajaId
+            const productos_caja = productosC
+            const cajero_id = props.cajeroId
 
             setCambioC(totalRecibido - total)
             const cambio = totalRecibido - total
-            const compra = {idCompra, metodoPagoC, cambio, fecha, hora, cajaId, productosC, cajeroId}
+            const compra = {id, metodo_pago, cambio, fecha, hora, num_caja, productos_caja, cajero_id}
+
             console.log(compra)
-        }
 
-        /*
-        const response = await fetch('/compras',{
-            method: 'POST',
-            body: JSON.stringify(compra),
-            headers: {
-                'Content-Type': 'application/json'
+            const response = await fetch('http://localhost:4000/compras',{
+                method: 'POST',
+                body: JSON.stringify(compra),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const json = await response.json()
+
+            if (!response.ok){
+                setError(json.error)
             }
-        })
-        const json = await response.json()
-
-        if (!response.ok){
-            setError(json.error)
+            
+            if (response.ok){
+                setId(1)
+                setIdCompra(0)
+                setCantProd(0)
+                setMetodoPago('Efectivo')
+                setProductosC({})
+                setTotal(0)
+                setTotalRecibido(0)
+                setError(null)
+                console.log('Nueva compra agregada', json)
+            }
         }
-        
-        if (response.ok){
-            setId('')
-            setMetodoPago('')
-            setCambio(0)
-            setNumCaja(0)
-            setProductosC({})
-            setError(null)
-            console.log('Nueva compra agregada', json)
-        }*/
     }
 
     const fetchProduct = async () => {
@@ -91,7 +109,7 @@ const SalesForm = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        console.log("fui accionado")
         const response = await fetch('http://localhost:4000/compras/count')
         const data = await response.json();
 
@@ -123,6 +141,7 @@ const SalesForm = (props) => {
             <input 
                 placeholder='Cantidad Producto'
                 type='number'
+                min='0'
                 onChange={event => setCantProd(event.target.value)}
                 value={cantProd}
             >
