@@ -35,7 +35,6 @@ const Inventory = ({}) => {
 
   function handleChange(event) {
     const {value} = event.target
-    console.log(value)
     setCategoria(value)
     fetchProductos()
   }
@@ -43,14 +42,12 @@ const Inventory = ({}) => {
   const handleClickAddSkip = () => {
     let newValue = skip + 1
     setSkip(newValue)
-    console.log(skip)
     fetchProductos()
   }
 
   const handleClickReduceSkip = () => {
     let newValue = skip - 1
     setSkip(newValue)
-    console.log(skip)
     fetchProductos()
   }
 

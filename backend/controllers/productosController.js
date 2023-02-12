@@ -7,8 +7,6 @@ const getProductos = async (req, res) => {
 
 
     const productos = await Productos.find({}).sort({id: 1}).skip(0).limit(20)
-    //const productos = await Productos.find({categoria: cat}).sort({id: 1}).skip(page).limit(20)
-    //const productos = await Productos.find({}).sort({id: 1}).limit(10)
 
     res.status(200).json(productos)
 }
