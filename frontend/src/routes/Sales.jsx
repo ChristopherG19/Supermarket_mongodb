@@ -1,15 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
-import { useEffect, useState } from 'react'
-import Header from './components/header'
-import Header_sales from './components/Header_ventas'
-import SalesForm from './components/SalesForm'
-// import { getOneProducto } from '../../../backend/controllers/productosController'
-=======
 import Header from '../components/header'
 import Sells_table from '../components/Sells_table'
->>>>>>> 62061fa80d6ae52d2a2b63c952a72e4808244c9f
 
 const Sales = ({}) => {
 
