@@ -1,9 +1,11 @@
 const Productos = require('../models/productosModel')
 const mongoose = require('mongoose')
+const productosModel = require('../models/productosModel')
 
 // get all Producto
 const getProductos = async (req, res) => {
-    const productos = await Productos.find({}).sort({id: 1}).limit(10)
+    const productos = await Productos.find({}).sort({id: 1}).limit(20)
+    //const productos = await Productos.find({}).sort({id: 1}).limit(10)
 
     res.status(200).json(productos)
 }
@@ -46,6 +48,19 @@ const deleteProducto = async (req, res) => {
     res.status(200).json()
 }
 
+const findByCategory = async (req, res) => {
+
+    const { categoria } = req.categoria
+
+    const producto = await productosModel.find({categoria : categoria})
+
+    if (producto.length == 0){
+        res.status(400).json({error: 'No se ha encontrado el producto especificado'})
+    }
+
+    res.status(200).json(producto[0])
+}
+
 const updateProducto = async (req, res) => {
     const { id } = req.params
 
@@ -65,5 +80,6 @@ module.exports = {
     getProductos,
     getOneProducto,
     deleteProducto, 
-    updateProducto
+    updateProducto,
+    findByCategory
 }

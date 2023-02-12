@@ -4,24 +4,28 @@ const {
     getProductos,
     getOneProducto,
     deleteProducto, 
-    updateProducto
+    updateProducto,
+    findByCategory
 } = require('../controllers/productosController')
 
 const router = express.Router()
 
-// Obtener todas las cajas
+// Obtener todas las productos
 router.get('/', getProductos)
 
-// Obtener una caja
+// Obtener una producto
 router.get('/:id', getOneProducto)
 
-// Post a new caja
+// Post a new producto
 router.post('/', createProducto)
 
-// Delete a caja
+// Delete a producto
 router.delete('/:id', deleteProducto)
 
-// Update a caja
+// Update a producto
 router.patch('/:id', updateProducto)
+
+// Get producto by category
+router.patch('/:categoria', findByCategory)
 
 module.exports = router

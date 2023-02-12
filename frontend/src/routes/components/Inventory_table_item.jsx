@@ -1,24 +1,43 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Inventory_table_item = ({ id, producto, precio, cantidad }) => {
+
+const Inventory_table_item = ({ item }) => {
+
+  const handleClick = async () => {
+    const response = await fetch('http://localhost:4000/productos' + item._id, {
+      method: 'DELETE'
+    })
+    const json = await response.json()
+
+    if (response.ok) {
+      
+
+    }
+
+  }
 
   return (
     <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
       <td class="border-grey-light border hover:bg-gray-100 p-3">
-        {id}
+        {item.id}
       </td>
       <td class="border-grey-light border hover:bg-gray-100 p-3">
-        {producto}
+        {item.nombre}
+      </td>
+      <td class="border-grey-light border hover:bg-gray-100 p-3">
+        {item.proveedor}
       </td>
       <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-        {precio}
+        {item.precio}
       </td>
       <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
-        {cantidad}
+        {item.cantidadDisponible}
       </td>
       <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
-        <button>Delete</button>
+        <button onClick={handleClick}>
+          Delete
+        </button>
       </td>
     </tr>
   )
