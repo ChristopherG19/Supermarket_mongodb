@@ -17,23 +17,23 @@ const Inventory_table_item = ({ item }) => {
   }
 
   return (
-    <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-      <td class="border-grey-light border hover:bg-gray-100 p-3">
+    <tr id={item.id}>
+      <td>
         {item.id}
       </td>
-      <td class="border-grey-light border hover:bg-gray-100 p-3">
+      <td >
         {item.nombre}
       </td>
-      <td class="border-grey-light border hover:bg-gray-100 p-3">
+      <td>
         {item.proveedor}
       </td>
-      <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
+      <td>
         {item.precio}
       </td>
-      <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+      <td>
         {item.cantidadDisponible}
       </td>
-      <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+      <td>
         <button onClick={handleClick}>
           Delete
         </button>

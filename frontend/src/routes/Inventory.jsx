@@ -32,8 +32,12 @@ const Inventory = ({}) => {
     }
   }
 
-  const handleSelect = (cat) => {
-    setCategoria(cat)
+
+  function handleChange(event) {
+    const {value} = event.target
+    console.log(value)
+    setCategoria(value)
+    fetchProductos()
   }
 
   const handleClickAddSkip = () => {
@@ -51,11 +55,6 @@ const Inventory = ({}) => {
   }
 
   const options = [
-    {
-      label: "Todos",
-      value: '',
-      key: 1
-    },
     {
       label: "Beauty & Hygiene",
       value: 'Beauty & Hygiene',
@@ -113,23 +112,17 @@ const Inventory = ({}) => {
       {/** Headers */}
       <Header title="Inventory"></Header>
       <header className='secondary-header'>
-        <form>
-          <select>
-            {options.map((o) => (
-              <option 
-                key={o.key} 
-                value={o.value}
-
-                // onClick = {handleSelect}
-                >
-                  {o.label}
-                </option>
-            ))}
-          </select>
-          <button type='submit' value='submit'>
-            Aplicar categoría
-          </button>
-        </form>
+        
+        <select onChange={handleChange}>
+          {options.map((o) => (
+            <option 
+              key={o.key} 
+              value={o.value}
+              >
+                {o.label}
+              </option>
+          ))}
+        </select>
       </header>
       {/** Table */}
       <div className='container'>
