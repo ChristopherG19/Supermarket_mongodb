@@ -22,6 +22,20 @@ const getOneProducto = async (req, res) => {
     res.status(200).json(producto[0])
 }
 
+// get a single Producto
+const getOneProductoByNombre = async (req, res) => {
+
+    const { nombre } = req.params
+
+    const producto = await Productos.find({nombre: nombre})
+
+    if (producto.length == 0){
+        res.status(400).json({error: 'No se ha encontrado el producto especificado'})
+    }
+
+    res.status(200).json(producto[0])
+}
+
 const createProducto = async (req, res) => {
     const { id, nombre, categoria, proveedor, cantidadDisponible, precio, descripcion } = req.body
 
@@ -47,9 +61,9 @@ const deleteProducto = async (req, res) => {
 }
 
 const updateProducto = async (req, res) => {
-    const { id } = req.params
+    const { nombre } = req.params
 
-    const producto = await Productos.findOneAndUpdate({id: id}, {
+    const producto = await Productos.findOneAndUpdate({nombre: nombre}, {
         ...req.body
     })
 
@@ -65,5 +79,6 @@ module.exports = {
     getProductos,
     getOneProducto,
     deleteProducto, 
-    updateProducto
+    updateProducto,
+    getOneProductoByNombre
 }

@@ -4,7 +4,8 @@ const {
     getProductos,
     getOneProducto,
     deleteProducto, 
-    updateProducto
+    updateProducto,
+    getOneProductoByNombre
 } = require('../controllers/productosController')
 
 const router = express.Router()
@@ -14,6 +15,7 @@ router.get('/', getProductos)
 
 // Obtener una caja
 router.get('/:id', getOneProducto)
+router.get('/nombre/:nombre', getOneProductoByNombre)
 
 // Post a new caja
 router.post('/', createProducto)
@@ -22,6 +24,6 @@ router.post('/', createProducto)
 router.delete('/:id', deleteProducto)
 
 // Update a caja
-router.patch('/:id', updateProducto)
+router.patch('/:nombre', updateProducto)
 
 module.exports = router

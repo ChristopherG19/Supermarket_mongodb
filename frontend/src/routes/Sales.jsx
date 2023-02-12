@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Header from './components/header'
 import Header_sales from './components/Header_ventas'
-import Sales_table_item from './components/Sales_table_item'
 import SalesForm from './components/SalesForm'
 // import { getOneProducto } from '../../../backend/controllers/productosController'
 
@@ -60,31 +59,6 @@ const Sales = ({}) => {
         hora = {hora}
       />
       {/** Tabla */}
-      <body>
-        <div className="container">
-          <table>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Producto</th>
-                <th>Disponibles</th>
-                <th>Precio</th>
-            </tr>
-            </thead>
-            <tbody>
-              {/** Elementos de la tabla */}
-              {productos && productos.map((productoC) => (
-                <Sales_table_item 
-                  id = {productoC.id}
-                  producto = {productoC.nombre}
-                  precio = {productoC.precio}
-                  disponibilidad = {productoC.cantidadDisponible}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </body>
       <SalesForm 
         fecha={fecha}
         hora={hora}

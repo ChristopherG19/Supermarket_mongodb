@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Sales_table_item from './Sales_table_item'
 
 const SalesForm = (props) => {
 
@@ -61,13 +62,12 @@ const SalesForm = (props) => {
             const hora = props.hora
             const num_caja = props.cajaId
             const productos_caja = productosC
+            productos_caja.total = total
             const cajero_id = props.cajeroId
 
             setCambioC(totalRecibido - total)
             const cambio = totalRecibido - total
             const compra = {id, metodo_pago, cambio, fecha, hora, num_caja, productos_caja, cajero_id}
-
-            console.log(compra)
 
             const response = await fetch('http://localhost:4000/compras',{
                 method: 'POST',
@@ -83,8 +83,35 @@ const SalesForm = (props) => {
             }
             
             if (response.ok){
+
+                for(const key in productosC){
+                    if(key !== 'total'){
+                        const pName = await fetch(`http://localhost:4000/productos/nombre/${key}`)
+                        const jsonP = await pName.json()
+                        const tempCalc = jsonP.cantidadDisponible - productosC[key].cantidad
+                        const nuevo = {cantidadDisponible: tempCalc}
+
+                        const patchR = await fetch(`http://localhost:4000/productos/${key}`,{
+                            method: 'PATCH',
+                            body: JSON.stringify(nuevo),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+
+                        if (!patchR.ok){
+                            setError(patchR.error)
+                        }
+                        
+                        if (patchR.ok){
+                            console.log('Cantidad modificada correctamente')
+                        }
+                    }
+                }
+
                 setId(1)
                 setIdCompra(0)
+                setCambioC(0)
                 setCantProd(0)
                 setMetodoPago('Efectivo')
                 setProductosC({})
@@ -100,8 +127,6 @@ const SalesForm = (props) => {
         const response = await fetch(`http://localhost:4000/productos/${id}`)
         const json = await response.json()
 
-        console.log("json: ",json)
-
         if(response.ok){
             agregarProducto(json)
         }
@@ -109,7 +134,6 @@ const SalesForm = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("fui accionado")
         const response = await fetch('http://localhost:4000/compras/count')
         const data = await response.json();
 
@@ -125,59 +149,88 @@ const SalesForm = (props) => {
     }
 
     return (
-        <form className="createProduct" onSubmit={handleSubmit}>
-            <h3>Agregar producto al carrito</h3>
-            <label>Id del producto: </label>
-            <input 
-                placeholder='Codigo Producto'
-                type='number'
-                min='1'
-                onChange={event => setId(event.target.value)}
-                value={id}
-            >
-            </input>
-            <br/>
-            <label>Cantidad del producto: </label>
-            <input 
-                placeholder='Cantidad Producto'
-                type='number'
-                min='0'
-                onChange={event => setCantProd(event.target.value)}
-                value={cantProd}
-            >
-            </input>
-            <br/>
-            <br/>
-            <button onClick={fetchProduct}>
-                Agregar producto
-            </button>
-            <br/>
-            <br/>
-            <label>Método de pago: </label>
-            <input 
-                type='checkbox'
-                onClick={() => setMetodoPago(!metodoPago)}
-            ></input>
-            <label>{metodoPago === true ? "Efectivo": "Tarjeta"}</label>
-            <br/>
-            <label>El total es: ${total}</label>
-            <br/>
-            <br/>
-            <label>Dinero recibido: </label>
-            <input 
-                type='number'
-                onChange={event => setTotalRecibido(event.target.value)}
-                value={totalRecibido}
-            ></input>
-            <br/>
-            <br/>
-            {error && <div className="error">{error}</div>}
-            <button onClick={evalTotal}>
-                Finalizar la compra
-            </button>
-            <br/>
-            <label>El cambio es: ${cambioC}</label>
-        </form>
+        <div>
+            <div className="container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th></th>
+                    <th>Precio Unidad</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {Object.keys(productosC).map((key) => {
+                        const { id, precioIn, cantidad } = productosC[key]
+                        return (
+                        <Sales_table_item 
+                            key={id}
+                            id = {id}
+                            producto = {key}
+                            precio = {precioIn}
+                            cantidad = {cantidad}
+                        />
+                        )
+                    })}
+                </tbody>
+            </table>
+            </div>
+            <form className="createProduct" onSubmit={handleSubmit}>
+                <h3>Agregar producto al carrito</h3>
+                <label>Id del producto: </label>
+                <input 
+                    placeholder='Codigo Producto'
+                    type='number'
+                    min='1'
+                    onChange={event => setId(event.target.value)}
+                    value={id}
+                >
+                </input>
+                <br/>
+                <label>Cantidad del producto: </label>
+                <input 
+                    placeholder='Cantidad Producto'
+                    type='number'
+                    min='0'
+                    onChange={event => setCantProd(event.target.value)}
+                    value={cantProd}
+                >
+                </input>
+                <br/>
+                <br/>
+                <button onClick={fetchProduct}>
+                    Agregar producto
+                </button>
+                <br/>
+                <br/>
+                <label>Método de pago: </label>
+                <input 
+                    type='checkbox'
+                    onClick={() => setMetodoPago(!metodoPago)}
+                ></input>
+                <label>{metodoPago === true ? "Efectivo": "Tarjeta"}</label>
+                <br/>
+                <label>El total es: ${total}</label>
+                <br/>
+                <br/>
+                <label>Dinero recibido: </label>
+                <input 
+                    type='number'
+                    onChange={event => setTotalRecibido(event.target.value)}
+                    value={totalRecibido}
+                ></input>
+                <br/>
+                <br/>
+                {error && <div className="error">{error}</div>}
+                <button onClick={evalTotal}>
+                    Finalizar la compra
+                </button>
+                <br/>
+                <label>El cambio es: ${cambioC}</label>
+            </form>
+        </div>    
     )
 }
 
