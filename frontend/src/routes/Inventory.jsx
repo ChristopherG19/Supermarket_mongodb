@@ -137,20 +137,20 @@ const Inventory = ({}) => {
               </option>
           ))}
         </select>
-        <input 
-          type='number'
-          defaultValue='20'
-          min='1'
-          max='25'
-          onChange={handleLimit}
-        />
         <label>
-          Sort-type
+          Limite: 
           <input 
-            type='checkbox'
-            onChange={handleCheckbox}
+            id='input_limite'
+            type='number'
+            defaultValue={20}
+            min='1'
+            max='25'
+            onChange={handleLimit}
           />
         </label>
+        <button id='refresh-btn' onClick={fetchProductos}>
+          refresh
+        </button>
       </header>
       {/** Table */}
       <div className='container'>
