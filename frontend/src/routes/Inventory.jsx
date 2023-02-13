@@ -47,7 +47,11 @@ const Inventory = ({}) => {
 
   const handleClickReduceSkip = () => {
     let newValue = skip - 1
-    setSkip(newValue)
+    if (newValue < 0){
+      setSkip(0)
+    } else {
+      setSkip(newValue)
+    }
     fetchProductos()
   }
 
@@ -107,6 +111,7 @@ const Inventory = ({}) => {
   return (
     <div className='all'>
       {/** Headers */}
+      <button className='home' onClick={() => window.location.assign("http://localhost:5173/menu")}>Home</button>
       <Header title="Inventory"></Header>
       <header className='secondary-header'>
         

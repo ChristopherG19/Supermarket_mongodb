@@ -61,10 +61,20 @@ const updateCaja = async (req, res) => {
     res.status(200).json(caja[0])
 }
 
+const sizeCollection = async (req, res) => {
+    try {
+        const countC = await Cajas.countDocuments()
+        res.status(200).json({ count: countC })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
     createCaja,
     getCajas,
     getSingleCaja,
     deleteCaja,
-    updateCaja
+    updateCaja,
+    sizeCollection
 }
