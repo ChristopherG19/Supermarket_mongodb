@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import Horario_item from './CajerosHo_table_item copy'
 import Cajeros_table_item from './Cajeros_table_item'
+import UpdateCajero from './UpdateCajero'
 import './css/Inventory.css'
+import UpdateHorarios from './UpdateHorarios'
 
 const ModCajeros = () => {
 
@@ -73,7 +76,7 @@ const ModCajeros = () => {
     ]
 
     return (
-        <div className='all'>
+        <div className='allCaj'>
             <header className='secondary-header'>
                 <label>Sort by:  
                     <select className='column-selector' onChange={handleChange}>
@@ -103,29 +106,61 @@ const ModCajeros = () => {
                     Buscar
                 </button>
             </header>
-            <div className='container'>
+            <div className='containerCajeros'>
                 <table>
-                <thead>
-                    <tr>
-                    {/** Titles */}
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>DPI</th>
-                    <th>Usuario</th>
-                    <th>Password</th>
-                    <th>Fin de labores</th>
-                    <th>Dias de vacaciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/** Elementos de la tabla */}
-                    {cajeros && cajeros.map((cajero) => (
-                    <Cajeros_table_item 
-                        item={cajero}
-                    />
-                    ))}
-                </tbody>
+                    <thead>
+                        <tr>
+                        {/** Titles */}
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>DPI</th>
+                        <th>Usuario</th>
+                        <th>Password</th>
+                        <th>Cumpleaños</th>
+                        <th>Inicio de labores</th>
+                        <th>Fin de labores</th>
+                        <th>Dias de vacaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/** Elementos de la tabla */}
+                        {cajeros && cajeros.map((cajero) => (
+                        <Cajeros_table_item 
+                            item={cajero}
+                        />
+                        ))}
+                    </tbody>
                 </table>
+            </div>
+            <div className='containerCajeros'>
+                <table>
+                    <thead>
+                        <tr>
+                        {/** Titles */}
+                        <th>Id</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {cajeros && cajeros.map((cajero) => (
+                            <Horario_item 
+                                item={cajero}
+                            />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className='containerCajerosUp'>
+                <UpdateCajero></UpdateCajero>
+            </div>
+            <div className='containerCajerosUp'>
+                <UpdateHorarios></UpdateHorarios>
             </div>
         </div>     
     )

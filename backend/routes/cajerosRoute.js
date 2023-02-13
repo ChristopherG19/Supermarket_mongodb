@@ -5,7 +5,9 @@ const {
     createCajero,
     sizeCollection,
     getCajerosActivos,
-    getCajerosSortLimit
+    getCajerosSortLimit,
+    updateCajero,
+    updateHorarioCajero
 } = require('../controllers/cajerosController')
 
 const router = express.Router()
@@ -28,5 +30,10 @@ router.get('/categoria/:columna/:limit/:orden', getCajerosSortLimit)
 // Post a new cajero
 router.post('/', createCajero)
 
+// Update a cajero
+router.patch('/:id', updateCajero)
+
+// Update a cajeros
+router.patch('/horario/:type/:idIn/:idFn', updateHorarioCajero)
 
 module.exports = router

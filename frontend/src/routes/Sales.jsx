@@ -85,6 +85,7 @@ const Sales = ({}) => {
       <Header 
         title="Ventas"
       />
+      <br/>
       <label>Cajero ID: </label>
       <input 
         placeholder='ID Cajero'
