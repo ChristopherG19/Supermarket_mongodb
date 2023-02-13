@@ -8,7 +8,7 @@ const Login = ({}) => {
   return (
     <div className='fullscreen'>
       <div>
-        <h2>Bienvendio a</h2>
+        <h2>Bienvenido a</h2>
         <h1>Supermarket</h1>
         <p>Hecho por:</p>
         <p>Christopher García (20541)</p>

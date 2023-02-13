@@ -11,7 +11,9 @@ const router = express.Router()
 // Obtener todas las compras
 router.get('/', getCompra)
 
+// Obtener cantidad de documentos
 router.get('/count', sizeCollection)
+
 // Obtener una compra
 router.get('/:id', getOneCompra)
 

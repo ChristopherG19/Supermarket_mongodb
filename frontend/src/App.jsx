@@ -8,7 +8,7 @@ import Menu from './routes/Menu'
 import Sales from './routes/Sales'
 import Inventory from './routes/Inventory'
 import Stats from './routes/Stats'
-
+import Modifications from './routes/Modifications'
 
 
 const App = () => (
@@ -20,6 +20,7 @@ const App = () => (
       <Route exact path="/ventas" element = {<Sales/>}/>
       <Route exact path="/inventario" element = {<Inventory/>}/>
       <Route exact path="/estadisticas" element = {<Stats/>}/>
+      <Route exact path="/modificaciones" element = {<Modifications/>}/>
     </Routes>
   </div>
   
