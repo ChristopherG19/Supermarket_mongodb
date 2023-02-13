@@ -91,71 +91,107 @@ const SalesForm = (props) => {
             setError("Lo sentimos, debes pagar la totalidad de la factura")
             setTotalRecibido(0)
         } else {
-            setError(null)
-            const id = idCompra
-            const metodo_pago = metodoPagoC
-            const fecha = props.fecha
-            const hora = props.hora
-            const num_caja = props.cajaId
-            const productos_caja = productosC
-            productos_caja.total = total
-            const cajero_id = props.cajeroId
+            if (Object.keys(productosC).length !== 0){
+                setError(null)
+                const id = idCompra
+                const metodo_pago = metodoPagoC
+                const fecha = props.fecha
+                const hora = props.hora
+                const num_caja = props.cajaId
+                const productos_caja = productosC
+                productos_caja.total = total
+                const cajero_id = props.cajeroId
 
-            setCambioC(totalRecibido - total)
-            const cambio = totalRecibido - total
-            const compra = {id, metodo_pago, cambio, fecha, hora, num_caja, productos_caja, cajero_id}
+                setCambioC(totalRecibido - total)
+                const cambio = totalRecibido - total
+                const compra = {id, metodo_pago, cambio, fecha, hora, num_caja, productos_caja, cajero_id}
 
-            const response = await fetch('http://localhost:4000/compras',{
-                method: 'POST',
-                body: JSON.stringify(compra),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            const json = await response.json()
+                if (cajero_id !== 0){
+                    const response = await fetch('http://localhost:4000/compras',{
+                        method: 'POST',
+                        body: JSON.stringify(compra),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    const json = await response.json()
 
-            if (!response.ok){
-                setError(json.error)
-            }
-            
-            if (response.ok){
+                    if (!response.ok){
+                        setError(json.error)
+                    }
+                    
+                    if (response.ok){
+                        console.log("Nueva compra agregada ", json)
 
-                for(const key in productosC){
-                    if(key !== 'total'){
-                        const pName = await fetch(`http://localhost:4000/productos/nombre/${key}`)
-                        const jsonP = await pName.json()
-                        const tempCalc = jsonP.cantidadDisponible - productosC[key].cantidad
-                        const nuevo = {cantidadDisponible: tempCalc}
+                        // Se actualiza colección cajas
+                        const dineroEntrante = total - cambio
 
-                        const patchR = await fetch(`http://localhost:4000/productos/${key}`,{
+                        const cajasInfo = await fetch(`http://localhost:4000/cajas/${props.cajaId}`)
+                        const jsonInfo = await cajasInfo.json()
+
+                        const changeMoney = jsonInfo.dinero_caja + dineroEntrante
+                        const transactions = jsonInfo.cant_transacciones + 1
+
+                        const ingresoCaja = {dinero_caja: changeMoney, cant_transacciones: transactions}
+
+                        const patchCaja = await fetch(`http://localhost:4000/cajas/${props.cajaId}`,{
                             method: 'PATCH',
-                            body: JSON.stringify(nuevo),
+                            body: JSON.stringify(ingresoCaja),
                             headers: {
                                 'Content-Type': 'application/json'
                             }
                         })
 
-                        if (!patchR.ok){
-                            setError(patchR.error)
+                        if (!patchCaja.ok){
+                            setError(patchCaja.error)
                         }
                         
-                        if (patchR.ok){
-                            console.log('Cantidad modificada correctamente')
+                        if (patchCaja.ok){
+                            console.log('Caja modificada correctamente')
                         }
+
+                        // Se actualiza colección productos
+                        for(const key in productosC){
+                            if(key !== 'total'){
+                                const pName = await fetch(`http://localhost:4000/productos/nombre/${key}`)
+                                const jsonP = await pName.json()
+                                const tempCalc = jsonP.cantidadDisponible - productosC[key].cantidad
+                                const nuevo = {cantidadDisponible: tempCalc}
+
+                                const patchR = await fetch(`http://localhost:4000/productos/${key}`,{
+                                    method: 'PATCH',
+                                    body: JSON.stringify(nuevo),
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+
+                                if (!patchR.ok){
+                                    setError(patchR.error)
+                                }
+                                
+                                if (patchR.ok){
+                                    console.log('Cantidad modificada correctamente')
+                                }
+                            }
+                        }
+
+                        // Se reinicia compra
+                        setId(1)
+                        setIdCompra(0)
+                        setCambioC(0)
+                        setCantProd(0)
+                        setMetodoPago(true)
+                        setMetodoPagoC('Efectivo')
+                        setProductosC({})
+                        setTotal(0)
+                        setTotalRecibido(0)
+                        setError(null)
+                        console.log('Nueva compra agregada', json)
                     }
                 }
-
-                setId(1)
-                setIdCompra(0)
-                setCambioC(0)
-                setCantProd(0)
-                setMetodoPago(true)
-                setMetodoPagoC('Efectivo')
-                setProductosC({})
-                setTotal(0)
-                setTotalRecibido(0)
-                setError(null)
-                console.log('Nueva compra agregada', json)
+            } else {
+                setError("No puedes dejar el carrito vacío")
             }
         }
     }

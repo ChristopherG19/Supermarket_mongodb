@@ -149,7 +149,7 @@ const Inventory = ({}) => {
           />
         </label>
         <button id='refresh-btn' onClick={fetchProductos}>
-          refresh
+          Refrescar
         </button>
       </header>
       {/** Table */}
@@ -179,10 +179,10 @@ const Inventory = ({}) => {
       <footer>
         <div>
           <button type='submit' onClick={handleClickReduceSkip}>
-            retroceder
+            Retroceder
           </button>
           <button type='submit' onClick={handleClickAddSkip}>
-            avanzar
+            Avanzar
           </button>
         </div>
         <hr></hr>

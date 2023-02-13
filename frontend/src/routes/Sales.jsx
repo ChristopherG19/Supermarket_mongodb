@@ -28,18 +28,23 @@ const Sales = ({}) => {
   const fecha = getCurrentDate()
   const hora = getCurrentHour()
 
-  const[id_cajero, setIdCajero] = useState(1)
+  const f = new Date()
+
+  const[id_cajero, setIdCajero] = useState(0)
   const[id_caja, setIdCaja] = useState(1)
   const[id_cajeroMax, setIdCajeroMax] = useState(0)
   const[id_cajaMax, setIdCajaMax] = useState(0)
 
+  const[cajeros_activos, setCajerosActivos] = useState([])
 
   useEffect(() => {
     const fetchProductos = async () => {
       const response = await fetch('http://localhost:4000/cajeros/count')
       const response2 = await fetch('http://localhost:4000/cajas/count')
+      const response3 = await fetch('http://localhost:4000/cajeros/active')
       const data = await response.json();
       const data2 = await response2.json();
+      const data3 = await response3.json();
 
       if(response.ok){
         setIdCajeroMax(data.count)
@@ -48,10 +53,30 @@ const Sales = ({}) => {
       if(response2.ok){
         setIdCajaMax(data2.count)
       }
+
+      if(response3.ok){
+        const CajerosA = []
+
+        data3.map(cajero => {
+          CajerosA.push(cajero.id)
+        })
+
+        setCajerosActivos(CajerosA)
+      }
+
     }
 
     fetchProductos()
   }, [])
+
+
+
+  const checkIDCajeros = (event) => {
+    const id_cajero_ingresado = parseInt(event.target.value);
+    if(cajeros_activos.includes(id_cajero_ingresado)){
+      setIdCajero(id_cajero_ingresado)
+    } 
+  }
 
   return (
     <div>
@@ -60,13 +85,14 @@ const Sales = ({}) => {
       <Header 
         title="Ventas"
       />
+      <br/>
       <label>Cajero ID: </label>
       <input 
         placeholder='ID Cajero'
         type='number'
         min='1'
         max={id_cajeroMax}
-        onChange={event => setIdCajero(event.target.value)}
+        onChange={checkIDCajeros}
         value={id_cajero}
       >
       </input>
@@ -89,7 +115,7 @@ const Sales = ({}) => {
       <br/>
       {/** Tabla */}
       <SalesForm 
-        fecha={fecha}
+        fecha={f}
         hora={hora}
         cajeroId={id_cajero}
         cajaId={id_caja}

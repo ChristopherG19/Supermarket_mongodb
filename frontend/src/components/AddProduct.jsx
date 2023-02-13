@@ -117,8 +117,8 @@ const AddProduct = ({}) => {
             }
 
         } else {
-            setError('No puden haber campos vacíos')
-            alert('No puden haber campos vacíos')
+            setError('No pueden haber campos vacíos')
+            alert('No pueden haber campos vacíos')
             console.log(codigo)
             console.log(name)
             console.log(cat)
