@@ -10,6 +10,8 @@ const Inventory = ({}) => {
   const[productos, setProductos] = useState([])
   const[categoria, setCategoria] = useState('Beauty & Hygiene')
   const[skip, setSkip] = useState(0)
+  const[limit, setLimit] = useState(20)
+  const[sort, setSort] = useState(1)
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -25,7 +27,7 @@ const Inventory = ({}) => {
   }, [])
 
   const fetchProductos = async () => {
-    const response = await fetch(`http://localhost:4000/productos/categoria/${categoria}/${skip}`)
+    const response = await fetch(`http://localhost:4000/productos/categoria/${categoria}/${skip}/${limit}`)
     const json = await response.json()
 
     if (response.ok){
@@ -33,6 +35,16 @@ const Inventory = ({}) => {
     }
   }
 
+  function handleCheckbox(event) {
+    const s = sort
+    setSort(-1 * s)
+    fetchProductos()
+  }
+
+  function handleLimit(event) {
+    setLimit(event.target.value)
+    fetchProductos()
+  }
 
   function handleChange(event) {
     const {value} = event.target
@@ -125,6 +137,20 @@ const Inventory = ({}) => {
               </option>
           ))}
         </select>
+        <input 
+          type='number'
+          defaultValue='20'
+          min='1'
+          max='25'
+          onChange={handleLimit}
+        />
+        <label>
+          Sort-type
+          <input 
+            type='checkbox'
+            onChange={handleCheckbox}
+          />
+        </label>
       </header>
       {/** Table */}
       <div className='container'>
