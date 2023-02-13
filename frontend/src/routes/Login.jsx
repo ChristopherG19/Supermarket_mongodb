@@ -6,7 +6,7 @@ const Login = ({}) => {
 
 
   return (
-    <div className='all'>
+    <div className='fullscreen'>
       <div>
         <h2>Bienvendio a</h2>
         <h1>Supermarket</h1>
@@ -32,7 +32,7 @@ const Login = ({}) => {
             <a href="#!">Forgot Password ?</a>
           </div> */}
           <Link to="/menu">
-          <button>
+          <button className='iniciar-btn'>
             
               Iniciar
             
