@@ -110,8 +110,7 @@ const Inventory = ({}) => {
       {/** Headers */}
       <Header title="Inventory"></Header>
       <header className='secondary-header'>
-        
-        <select onChange={handleChange}>
+        <select className='category-selector' onChange={handleChange}>
           {options.map((o) => (
             <option 
               key={o.key} 
