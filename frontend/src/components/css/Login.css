@@ -1,0 +1,16 @@
+.all {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin: 0.5em 0 1em 0;
+}
+
+button {
+    padding: 1em;
+}
