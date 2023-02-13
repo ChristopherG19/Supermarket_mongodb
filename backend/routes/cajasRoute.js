@@ -4,13 +4,16 @@ const {
     getCajas,
     getSingleCaja,
     deleteCaja,
-    updateCaja
+    updateCaja,
+    sizeCollection
 } = require('../controllers/cajasController')
 
 const router = express.Router()
 
 // Obtener todas las cajas
 router.get('/', getCajas)
+
+router.get('/count', sizeCollection)
 
 // Obtener una caja
 router.get('/:id', getSingleCaja)

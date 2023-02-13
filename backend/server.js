@@ -2,7 +2,8 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
-const CajaRoutes = require('./routes/CajasRoute')
+const CajaRoutes = require('./routes/cajasRoute')
+const CajerosRoutes = require('./routes/cajerosRoute')
 const ComprasRoutes = require('./routes/comprasRoute')
 const ProductoRoutes = require('./routes/productosRoute')
 const cors = require('cors')
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 
 // Rutas
 app.use('/cajas', CajaRoutes)
+app.use('/cajeros', CajerosRoutes)
 app.use('/compras', ComprasRoutes)
 app.use('/productos', ProductoRoutes)
 

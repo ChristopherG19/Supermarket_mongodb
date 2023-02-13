@@ -30,7 +30,7 @@ const SalesForm = (props) => {
                     ingreso = {
                         id: parseInt(id),
                         precioIn: props.precio,
-                        cantidad: productosC[props.nombre].cantidad + parseInt(cantProd)
+                        cantidad: productosC[props.nombre].cantidad + (parseInt(cantProd))
                     }
                 } else {
                     ingreso = {
@@ -42,9 +42,45 @@ const SalesForm = (props) => {
 
                 setProductosC({...productosC, [props.nombre]:ingreso})
 
-                const totalTemp = total + (ingreso.precioIn*ingreso.cantidad)
+                const totalTemp = total + (ingreso.precioIn*parseInt(cantProd))
 
                 setTotal(totalTemp)
+            }
+        }
+    }
+
+    const eliminarProducto = async () => {
+        const keys = Object.keys(productosC)
+
+        if (keys.length == 0 && total > 0){
+            setTotal(0)
+        }
+
+        if (keys.length > 0){
+            const ultimoIngreso = productosC[keys.pop()]
+            const response = await fetch(`http://localhost:4000/productos/${ultimoIngreso.id}`)
+            const json = await response.json()
+
+            if(response.ok){
+                if(total > 0){
+                    const totalTemp = total - (ultimoIngreso.precioIn * ultimoIngreso.cantidad)
+                    setTotal(totalTemp)
+                }
+                delete productosC[json.nombre]
+                setProductosC({...productosC})
+
+                let totalInCart = 0
+                for(const key in productosC){
+                    if(key !== 'total'){
+                        let suma = productosC[key].cantidad*productosC[key].precioIn
+                        totalInCart += suma
+                    }
+                }
+
+                if(total != totalInCart){
+                    setTotal(totalInCart)
+                }
+
             }
         }
     }
@@ -164,16 +200,18 @@ const SalesForm = (props) => {
                 </thead>
                 <tbody>
                     {Object.keys(productosC).map((key) => {
-                        const { id, precioIn, cantidad } = productosC[key]
-                        return (
-                        <Sales_table_item 
-                            keyT={id}
-                            id = {id}
-                            producto = {key}
-                            precio = {precioIn}
-                            cantidad = {cantidad}
-                        />
-                        )
+                        if(key !== 'total'){
+                            const { id, precioIn, cantidad } = productosC[key]
+                            return (
+                            <Sales_table_item 
+                                keyT={id}
+                                id = {id}
+                                producto = {key}
+                                precio = {precioIn}
+                                cantidad = {cantidad}
+                            />
+                            )
+                        }
                     })}
                 </tbody>
             </table>
@@ -203,6 +241,9 @@ const SalesForm = (props) => {
                 <br/>
                 <button onClick={fetchProduct}>
                     Agregar producto
+                </button>
+                <button onClick={eliminarProducto}>
+                    Eliminar producto
                 </button>
                 <br/>
                 <br/>
