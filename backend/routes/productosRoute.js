@@ -18,7 +18,7 @@ router.get('/', getProductos)
 router.get('/:id', getOneProducto)
 
 // Get producto by category
-router.get('/categoria/:categoria/:skip', findByCategory)
+router.get('/categoria/:categoria/:skip/:limit', findByCategory)
 
 // Get producto by nombre
 router.get('/nombre/:nombre', getOneProductoByNombre)

@@ -70,9 +70,10 @@ const deleteProducto = async (req, res) => {
 
 const findByCategory = async (req, res) => {
 
-    const { categoria, skip } = req.params
+    const { categoria, skip, limit } = req.params
+    // const { categoria, skip} = req.params
 
-    let limit = 20
+    // let limit = 20
     let s = limit * skip
 
     const productos = await Productos.find({categoria: categoria}).sort({id: 1}).skip(s).limit(limit)

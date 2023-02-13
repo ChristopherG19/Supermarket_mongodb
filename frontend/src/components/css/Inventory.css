@@ -28,11 +28,16 @@
 .secondary-header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     background-color: black;
     padding: 1em 0;
     margin: 1em 0;
 
+}
+
+.secondary-header > label > input {
+    padding: 0.5em;
+    margin: 0em 1em;
 }
 
 .category-selector {
@@ -40,6 +45,7 @@
     border-radius: 1em;
     border-color: white;
     background-color: green;
+    text-align: center;
 }
 
 
