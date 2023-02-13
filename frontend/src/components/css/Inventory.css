@@ -35,7 +35,7 @@
 
 }
 
-select {
+.category-selector {
     padding: 1em;
     border-radius: 1em;
     border-color: white;
@@ -95,6 +95,13 @@ footer > div > button {
 footer > div > div > input {
     margin: 1em;
     padding: 0.5em;
+    text-align: center;
+}
+
+footer > div > div > select {
+    margin: 1em;
+    padding: 0.5em;
+    text-align: center;
 }
 
 footer > button {
