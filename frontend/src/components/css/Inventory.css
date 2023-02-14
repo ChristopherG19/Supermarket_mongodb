@@ -39,6 +39,14 @@
     display: flex;
 }
 
+.containerCompras {
+    width: 100%;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
 .containerCajerosUp {
     height: 40%;
     width: 100%;

@@ -3,7 +3,8 @@ const {
     createCompra,
     getCompra,
     getOneCompra,
-    sizeCollection
+    sizeCollection,
+    getComprasSortLimit
 } = require('../controllers/compraController')
 
 const router = express.Router()
@@ -16,6 +17,9 @@ router.get('/count', sizeCollection)
 
 // Obtener una compra
 router.get('/:id', getOneCompra)
+
+// Obtener compras sort and limit
+router.get('/vista/:columna/:limit/:orden', getComprasSortLimit)
 
 // Post a new compra
 router.post('/', createCompra)
