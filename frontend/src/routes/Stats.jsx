@@ -1,6 +1,4 @@
 import React, { useEffect , useState } from 'react'
-import { Link } from 'react-router-dom'
-import Header from '../components/header'
 import CajasCharts from '../components/CajasCharts'
 import ComprasCharts from '../components/ComprasCharts'
 import CajerosCharts from '../components/CajerosCharts'

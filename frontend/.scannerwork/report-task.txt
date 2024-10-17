@@ -1,0 +1,6 @@
+projectKey=Supermarket-sonar
+serverUrl=http://localhost:9001
+serverVersion=9.9.7.96285
+dashboardUrl=http://localhost:9001/dashboard?id=Supermarket-sonar
+ceTaskId=AZKbkrOlawfv_GmzfYRr
+ceTaskUrl=http://localhost:9001/api/ce/task?id=AZKbkrOlawfv_GmzfYRr

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const AddProduct = ({}) => {
+const AddProduct = () => {
 
     // info del nuevo producto
     const [codigo, setCodigo] = useState(null)

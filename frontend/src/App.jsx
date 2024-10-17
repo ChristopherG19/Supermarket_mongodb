@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 // Other files imports
 import './App.css'

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 const Cajeros_table_item = ({ item }) => {
     return (

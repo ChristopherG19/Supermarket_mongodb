@@ -1,6 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
 
 const Inventory_table_item = ({ item }) => {
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 const Sales_table_item = ({ keyT, id, producto, precio, cantidad}) => {
 

@@ -1,7 +1,5 @@
 import React, { useEffect , useState } from 'react'
 import '../styles/Routes.css'
-import Cajeros_table_item from './Cajeros_table_item'
-import Header from './Header'
 import './css/Inventory.css'
 import ComprasItems from './ComprasItems'
 

@@ -1,12 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Header_sales from '../components/Header_ventas'
 import SalesForm from '../components/SalesForm'
-// import { getOneProducto } from '../../../backend/controllers/productosController'
 
-const Sales = ({}) => {
+const Sales = () => {
 
   function getCurrentDate(separator = '/') {
     let newDate = new Date()

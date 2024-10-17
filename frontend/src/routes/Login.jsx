@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../components/css/Login.css'
 
-const Login = ({}) => {
+const Login = () => {
 
 
   return (

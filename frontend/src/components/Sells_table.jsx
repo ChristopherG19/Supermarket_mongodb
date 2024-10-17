@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Sells_table_item from './Sells_table_item'
 
 
-const Sells_table = ({}) => {
+const Sells_table = () => {
 
   return (
     <body class="flex items-center justify-center">

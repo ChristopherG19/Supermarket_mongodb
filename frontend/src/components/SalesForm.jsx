@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Sales_table_item from './Sales_table_item'
 
 const SalesForm = (props) => {
