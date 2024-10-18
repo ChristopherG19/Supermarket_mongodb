@@ -5,6 +5,15 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000
+    port: 3000,
+    headers: {
+      'X-Frame-Options': 'DENY',
+      'X-Content-Type-Options': 'nosniff'
+    },
+    cors: {
+      origin: ['http://localhost:3000', 'http://localhost:5173'],
+      methods: ['GET', 'POST'], 
+      credentials: true,
+    }
   }
 })
